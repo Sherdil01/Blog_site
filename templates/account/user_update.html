@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Profil Update {% endblock %}
+
+{% block content %}
+    <h1>Update profile</h1>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+       {{ form.as_p}}
+        <button class="btn btn-primary" type="submit">  Update profile </button>
+    </form>
+
+{% endblock %}
+
+<p>{{form.username}} </p>
+<p> {{ form.username.label }}</p>
+<p> {{ form.username.help_text }}</p>

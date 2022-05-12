@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Category List {% endblock %}
+{% block content %}
+
+{% for category in categories %}
+
+    <h1> {{category.name }} ({{category.blog.count}})</h1>
+    <img style="width: 300px;" src="{{ category.image.url }}">
+    <p> {{ category.description |safe }}</p>
+    <p>User count: {{category.user.count}}</p>
+    {% if request.user in category.user.all %}
+        <a href="{% url 'category_user_add' category.slug %}" class="btn btn-danger"> Tark etish </a>
+    {% else %}
+        <a href="{% url 'category_user_add' category.slug %}" class="btn btn-success"> A`zo bo`lish  </a>
+    {% endif %}
+    <hr>
+{% endfor %}
+
+{% endblock  %}

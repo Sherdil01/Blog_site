@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<form method='get'>
+    <input name="search" placeholder="username search"> 
+    <button type="submit" class="btn btn-success">qidirish</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">username</th>
+        <th scope="col">date_joined</th>
+        <th scope="col">email</th>
+        <th scope="col"> Last login</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+      <tr>
+        <th scope="row">{{ user.id }}</th>
+        <td>{{user.username}}</td>
+        <td>{{user.date_joined}}</td>
+        <td>{{ user.email }}</td>
+        <td> {{user.last_login}}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

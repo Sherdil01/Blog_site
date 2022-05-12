@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for blog in blogs %}
+
+    <h2>{{ blog.title }}</h2>
+    <p>{{blog.category.name}} Data: {{blog.created }}</p>
+    <img style="width: 300px;" src="{{ blog.image.url }}">
+    <p> {{ blog.description |safe }}</p>
+    <p>User: {{blog.user.username}}</p>
+    <span> Wiews: {{blog.views }}</span>
+    {%for tag in blog.tags.all %}
+    <a href="{% url 'tag_blogs' tag.slug %}">#{{tag}}</a>  
+    {% endfor %} 
+{% endfor %}
+<hr>
+{% endblock  %}

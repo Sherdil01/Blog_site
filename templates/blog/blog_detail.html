@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Blog List {% endblock %}
+{% block content %}
+
+
+    <h2>{{ blog.title }}</h2>
+    <p>{{blog.category.name}} Data: {{blog.created }}</p>
+    <img style="width: 300px;" src="{{ blog.image.url }}">
+    <p> {{ blog.description |safe }}</p>
+    <p>User: {{blog.user.username}}</p>
+    <span> Wiews: {{blog.views }}</span><br>
+    
+    <a href="{% url 'blog_update' blog.slug %}" >Update</a>
+    <br>
+    {%for tag in blog.tags.all %}
+    <a href="{% url 'tag_blogs' tag.slug %}">#{{tag}}</a>      
+{% endfor %}
+<hr>
+    <div class="row">
+        <div class="col-lg-6">
+            {% for comment in blog.comment_set.all %}
+                <p> {{comment.text }}</p>
+                <p> {{comment.rating }}</p>
+                <form action="{% url 'comment_delete' comment.pk %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit"> Delete </button>
+                </form>
+            {% endfor %}
+
+        </div>
+
+        <div class="col-lg-6">
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit"> Save </button>
+                        </form>
+        </div>
+    </div>
+{% endblock  %}
